@@ -3,3 +3,1410 @@ title: "Boone Health"
 output: html_notebook
 ---
 
+Step1: Loading libraries and data
+```{r}
+# Load the tidyverse package
+library(tidyverse)
+
+# Load the readxl package to import the original datasets which are in Excel format
+library(readxl)
+```
+
+The original data file has two header rows. The first row contains broad categories, while the second row provides specific variable names. The analysis needs to combine them into a single row of descriptive column names after importing the data.
+Import 2024 data:
+```{r}
+#Read 2024 data starting from the second row (skip the first row)
+data24 <- read_excel("data/2024_county_health_release_data_-_v1.xlsx", sheet=2, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2024_county_health_release_data_-_v1.xlsx", sheet=2, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data24)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data24) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone24 <- data24 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2024, .after = County) 
+```
+
+Import 2023 data:
+```{r}
+#Read 2023 data starting from the second row (skip the first row)
+data23 <- read_excel("data/2023 County Health Rankings Data - v2.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2023 County Health Rankings Data - v2.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data23)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data23) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone23 <- data23 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2023, .after = County)
+```
+
+Import 2022 data:
+```{r}
+#Read 2022 data starting from the second row (skip the first row)
+data22 <- read_excel("data/2022 County Health Rankings Data - v1.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2022 County Health Rankings Data - v1.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data22)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data22) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone22 <-data22 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2022, .after = County)
+```
+
+Import 2021 data:
+```{r}
+#Read 2021 data starting from the second row (skip the first row)
+data21 <- read_excel("data/2021 County Health Rankings Data - v1.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2021 County Health Rankings Data - v1.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data21)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data21) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone21 <- data21 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2021, .after = County)
+```
+
+Import 2020 data:
+```{r}
+#Read 2020 data starting from the second row (skip the first row)
+data20 <- read_excel("data/2020 County Health Rankings Data - v2.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2020 County Health Rankings Data - v2.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data20)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data20) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone20 <- data20 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2020, .after = County)
+```
+
+Import 2019 data:
+```{r}
+#Read 2019 data starting from the second row (skip the first row)
+data19 <- read_excel("data/2019 County Health Rankings Data - v3.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2019 County Health Rankings Data - v3.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data19)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data19) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone19 <- data19 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2019, .after = County)
+```
+
+Import 2018 data:
+```{r}
+#Read 2018 data starting from the second row (skip the first row)
+data18 <- read_excel("data/2018 County Health Rankings Data - v2.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2018 County Health Rankings Data - v2.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data18)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data18) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone18 <- data18 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2018, .after = County)
+```
+
+Import 2017 data:
+```{r}
+#Read 2017 data starting from the second row (skip the first row)
+data17 <- read_excel("data/2017CountyHealthRankingsData.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2017CountyHealthRankingsData.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data17)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data17) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone17 <- data17 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2017, .after = County)
+```
+
+Import 2016 data:
+```{r}
+#Read 2016 data starting from the second row (skip the first row)
+data16 <- read_excel("data/2016 County Health Rankings Data - v3.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2016 County Health Rankings Data - v3.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data16)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data16) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone16 <- data16 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2016, .after = County)
+```
+
+Import 2015 data:
+```{r}
+#Read 2015 data starting from the second row (skip the first row)
+data15 <- read_excel("data/2015 County Health Rankings Data - v3.xlsx", sheet=4, skip = 1)
+
+#Read the first row (the category-level headers)
+top_header <- read_excel("data/2015 County Health Rankings Data - v3.xlsx", sheet=4, col_names = FALSE)
+
+#Combine the two header rows and clean up any "NA" in names
+new_names <- paste0(top_header[1, ], "_", names(data15)) %>%  str_replace_all("NA_|_NA|NA", "") 
+
+# Assign new column names
+colnames(data15) <- new_names
+
+#Filter the data of Boone County, Missouri
+boone15 <- data15 %>% filter(State == "Missouri", County == "Boone") %>% mutate(year = 2015, .after = County)
+```
+
+Step2: Checking data boundries, cleaning data, and joining tables
+
+Check data boundaries:
+Are there any inconsistencies in the columns? (col_summary created)
+```{r}
+# Create a named list of all yearly Boone County data frames (2015–2024)
+boone_list <- list(
+  `2015` = boone15,
+  `2016` = boone16,
+  `2017` = boone17,
+  `2018` = boone18,
+  `2019` = boone19,
+  `2020` = boone20,
+  `2021` = boone21,
+  `2022` = boone22,
+  `2023` = boone23,
+  `2024` = boone24)
+
+# Extract the column names from each year's dataset to compare their structures
+boone_colnames <- lapply(boone_list, names)
+
+# Convert column name lists into a long-format data frame with Year and Variable columns
+col_check <- imap_dfr(boone_colnames, ~ tibble(Year = .y, Variable = .x))
+
+# Create a presence/absence matrix to show which variables appear in which years
+col_summary <- col_check %>%
+  mutate(HasVariable = TRUE) %>%
+  pivot_wider(names_from = Year, values_from = HasVariable, values_fill = FALSE)
+```
+Findings: The variables across the annual datasets vary. Firstly, some variables have unnecessary numeric suffixes(e.g., "...6", "...7") and symbols (e.g., #). Secondly, some variables with the same meaning have different capitalizations. 
+
+Clean the variable names:
+```{r}
+# Remove numeric suffixes (e.g., "...6") to standardize variable names.
+# Remove unnecessary symbols (#), but keep underscores (_) and percentage signs (%).
+# Make variables all lowercase for consistency.
+boone24 <- boone24 %>%
+  rename_with(function(x) {
+    x %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone23 <- boone23 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone22 <- boone22 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone21 <- boone21 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone20 <- boone20 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone19 <- boone19 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone18 <- boone18 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone17 <- boone17 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone16 <- boone16 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+
+boone15 <- boone15 %>%
+  rename_with(function(col) {
+    col %>%
+      str_remove("\\.\\.\\.\\d+$") %>%
+      str_replace_all("[^[:alnum:]_%]", "") %>%
+      str_to_lower()
+  })
+```
+
+Check the variables of each table again to ensure uniformity (col_summary):
+```{r}
+# Create a named list of all yearly Boone County data frames (2015–2024)
+boone_list <- list(
+  `2015` = boone15,
+  `2016` = boone16,
+  `2017` = boone17,
+  `2018` = boone18,
+  `2019` = boone19,
+  `2020` = boone20,
+  `2021` = boone21,
+  `2022` = boone22,
+  `2023` = boone23,
+  `2024` = boone24)
+
+# Extract the column names from each year's dataset to compare their structures
+boone_colnames <- lapply(boone_list, names)
+
+# Convert column name lists into a long-format data frame with Year and Variable columns
+col_check <- imap_dfr(boone_colnames, ~ tibble(Year = .y, Variable = .x))
+
+# Create a presence/absence matrix(col_summary) to show which variables appear in which years
+col_summary <- col_check %>%
+  mutate(HasVariable = TRUE) %>%
+  pivot_wider(names_from = Year, values_from = HasVariable, values_fill = FALSE)
+```
+Findings: After the first round of cleaning, now there are 445 variables in all ten datasets. The data need further cleaning. Some variables are consistent across all years and some are specific to certain years. 
+
+Continue checking data boundaries:
+What are the different variables in each table (different_variable)?
+```{r}
+# Check the different variables in each table (2015-2024)
+different_variable <- col_summary %>% filter(`2015` == "FALSE"|
+                       `2016` == "FALSE"|
+                       `2017` == "FALSE"|
+                       `2018` == "FALSE"|
+                       `2019` == "FALSE"|
+                       `2020` == "FALSE"|
+                       `2021` == "FALSE"|
+                       `2022` == "FALSE"|
+                       `2023` == "FALSE"|
+                       `2024` == "FALSE") 
+
+# Check the number of different variables
+different_variable %>% count()
+```
+Findings: There are 371 different variables in total. Some variables appeared consistently only during a subset of years. This indicates the need to further examine the consistency across years.
+
+Are there any variables that appear consecutively in certain years?
+```{r}
+# Check the variables that appear consistently from 2020 to 2024 but are missing in other datasets
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "TRUE", 
+                       `2021` == "TRUE", 
+                       `2022` == "TRUE", 
+                       `2023` == "TRUE",
+                       `2024` == "TRUE") 
+
+# Check the variables that appear consistently from 2015 to 2019 but are missing in other datasets
+different_variable %>% filter(`2024` == "FALSE",
+                       `2023` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2019` == "TRUE", 
+                       `2018` == "TRUE", 
+                       `2017` == "TRUE", 
+                       `2016` == "TRUE",
+                       `2015` == "TRUE")
+```
+Findings: Some variables have the same meaning but are labeled differently in the 2015–2019 datasets compared to those in 2020–2024.
+
+```{r}
+# Check the variables that appear consistently from 2015 to 2023 but are missing in the 2024 dataset
+different_variable %>% filter(`2015` == "TRUE",
+                       `2016` == "TRUE", 
+                       `2017` == "TRUE", 
+                       `2018` == "TRUE", 
+                       `2019` == "TRUE", 
+                       `2020` == "TRUE", 
+                       `2021` == "TRUE", 
+                       `2022` == "TRUE", 
+                       `2023` == "TRUE",
+                       `2024` == "FALSE") 
+
+# Check the number of quartile-based variables
+different_variable %>% filter(`2015` == "TRUE",
+                       `2016` == "TRUE", 
+                       `2017` == "TRUE", 
+                       `2018` == "TRUE", 
+                       `2019` == "TRUE", 
+                       `2020` == "TRUE", 
+                       `2021` == "TRUE", 
+                       `2022` == "TRUE", 
+                       `2023` == "TRUE",
+                       `2024` == "FALSE") %>% 
+  filter(grepl("quartile", Variable, ignore.case = TRUE))
+```
+Findings: A total of 31 quartile variables appear consistently from 2015 to 2023 but are missing in the 2024 dataset, all of which are related to quartile measurement. In previous years, quartile values were used to represent county-level health factor rankings within each state, where 1 = top quartile, 2 = second quartile, 3 = third quartile, and 4 = bottom quartile.
+
+Are there any variables that only appear in certain years?
+```{r}
+# Check the variables that only appear in the 2024 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "TRUE")
+
+# Check the variables that only appear in the 2024 dataset and are related to National Z-Score.
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "TRUE") %>% 
+  filter(grepl("zscore", Variable, ignore.case = TRUE))
+
+# Check the variables that only appear in the 2024 dataset and are related to races.
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "TRUE") %>% 
+  filter(grepl("hispanic", Variable, ignore.case = TRUE))
+
+# Check the variables that only appear in the 2023 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "TRUE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2022 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "TRUE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2021 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "TRUE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2020 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "TRUE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2019 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "TRUE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2018 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "TRUE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2017 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "TRUE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2016 dataset
+different_variable %>% filter(`2015` == "FALSE",
+                       `2016` == "TRUE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2015 dataset
+different_variable %>% filter(`2015` == "TRUE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+```
+Findings1: There are 125 variables that appear only in the 2024 dataset. 34 of them are related to national z-scores, calculated using the formula (Measure − Average of U.S. counties) / Standard Deviation. The remaining 91 variables represent race-specific measurements for 4 key health outcomes:Premature Death (Years of Potential Life Lost Rate), Low Birth Weight (% LBW), Teen Birth Rate, and Injury Death Rate.In the 2024 dataset, two additional race categories were introduced: Non-Hispanic Native Hawaiian and Other Pacific Islander and Non-Hispanic 2+ Races. The other race categories — Hispanic (all races), Non-Hispanic American Indian/Alaska Native (AIAN), Non-Hispanic Asian, Non-Hispanic Black, and Non-Hispanic White — were also present in the previous nine years of data, but their names differ slightly, requiring standardization for consistent analysis.
+Findings2: The "mammographyscreening_%screened" variable in boone19 table shares the same meaning of "mammographyscreening_%withannualmammogram" in boone20-24 tables (Percentage of female Medicare enrollees having an annual mammogram (age 65-74)). In 2015-2018, percentage of female Medicare enrollees having at least 1 mammogram in 2 yrs (age 67-69) was measures.
+Findings3: There is inconsistency in the naming of "ypll" variables in boone18 table.The "prematuredeath_yearsofpotentiallifelostrateblack" variable in boone18 table shares the same meaning of "prematuredeath_ypllrateblack" in other tables.
+
+Continue cleaning the data:
+Standardize variable names:
+```{r}
+# Rename the variables with the same meaning but with different names.
+boone24 <- boone24 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone23 <- boone23 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",  
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone22 <- boone22 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone21 <- boone21 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone20 <- boone20 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone19 <- boone19 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+        
+        #Mammography Screening
+        . == "mammographyscreening_%screened" ~ "mammographyscreening_%withannualmammogram",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone18 <- boone18 %>%
+  rename_with(~ case_when(
+        #Premature death
+        . == "prematuredeath_yearsofpotentiallifelostrateblack" ~ "prematuredeath_ypllrateblack",
+        . == "prematuredeath_yearsofpotentiallifelostratehispanic" ~ "prematuredeath_ypllratehispanic",
+        . == "prematuredeath_yearsofpotentiallifelostratewhite" ~ "prematuredeath_ypllratewhite",
+        
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone17 <- boone17 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone16 <- boone16 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+
+boone15 <- boone15 %>%
+  rename_with(~ case_when(
+        # Physically unhealthy days
+        . == "poorphysicalhealthdays_physicallyunhealthydays" ~ "poorphysicalhealthdays_averagenumberofphysicallyunhealthydays",
+        
+        # Mental health days
+        . == "poormentalhealthdays_mentallyunhealthydays" ~ "poormentalhealthdays_averagenumberofmentallyunhealthydays",
+        
+        # Low birth weight
+        . == "lowbirthweight_%lbw" ~ "lowbirthweight_%lowbirthweight",
+        
+        # Adult obesity
+        . == "adultobesity_%obese" ~ "adultobesity_%adultswithobesity",
+
+        # Adult smoking
+        . == "adultsmoking_%smokers" ~ "adultsmoking_%adultsreportingcurrentlysmoking",
+       
+        # Access to exercise opportunities
+        . == "accesstoexerciseopportunities_%withaccess" ~ "accesstoexerciseopportunities_%withaccesstoexerciseopportunities",
+   
+        # Primary care physicians
+        . == "primarycarephysicians_pcprate" ~ "primarycarephysicians_primarycarephysiciansrate",
+        . == "primarycarephysicians_pcpratio" ~ "primarycarephysicians_primarycarephysiciansratio",
+        
+        # Mental health providers
+        . == "mentalhealthproviders_mhprate" ~ "mentalhealthproviders_mentalhealthproviderrate",
+        . == "mentalhealthproviders_mhpratio" ~ "mentalhealthproviders_mentalhealthproviderratio",
+        
+        # Alcohol-impaired driving deaths
+        . == "alcoholimpaireddrivingdeaths_%alcoholimpaired" ~ "alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement",
+        
+        # Driving alone to work
+        . == "drivingalonetowork_%drivealone" ~ "drivingalonetowork_%drivealonetowork",
+        
+        # Fair/poor health
+        . == "poororfairhealth_%fairpoor" ~ "poororfairhealth_%fairorpoorhealth",
+        
+        # High school graduation
+        . == "highschoolgraduation_graduationrate" ~ "highschoolgraduation_highschoolgraduationrate",
+        
+        # Preventable hospital stays
+        . == "preventablehospitalstays_preventablehosprate" ~ "preventablehospitalstays_preventablehospitalizationrate",
+      
+        # Social associations
+        . == "socialassociations_associationrate" ~ "socialassociations_socialassociationrate",
+        TRUE ~ .
+  ))
+```
+
+Standardize the names of race-specific variables:
+```{r}
+# Rename the race-specific variables in boone24 table
+boone24 <- boone24 %>%
+  rename_with(~ case_when(
+    str_detect(., "hispanicallraces") ~ str_replace(., "hispanicallraces", "hispanic"),
+    str_detect(., "nonhispanicaian") ~ str_replace(., "nonhispanic", ""),
+    str_detect(., "nonhispanicasian") ~ str_replace(., "nonhispanic", ""),
+    str_detect(., "nonhispanicblack") ~ str_replace(., "nonhispanic", ""),
+    str_detect(., "nonhispanicwhite") ~ str_replace(., "nonhispanic", ""),
+    TRUE ~ .
+  ))
+```
+
+Check the variables of each table again to ensure uniformity (col_summary2):
+```{r}
+# Create a named list of all yearly Boone County data frames (2015–2024)
+boone_list <- list(
+  `2015` = boone15,
+  `2016` = boone16,
+  `2017` = boone17,
+  `2018` = boone18,
+  `2019` = boone19,
+  `2020` = boone20,
+  `2021` = boone21,
+  `2022` = boone22,
+  `2023` = boone23,
+  `2024` = boone24)
+
+# Extract the column names from each year's dataset to compare their structures
+boone_colnames <- lapply(boone_list, names)
+
+# Convert column name lists into a long-format data frame with Year and Variable columns
+col_check <- imap_dfr(boone_colnames, ~ tibble(Year = .y, Variable = .x))
+
+# Create a presence/absence matrix(col_summary) to show which variables appear in which years
+col_summary2 <- col_check %>%
+  mutate(HasVariable = TRUE) %>%
+  pivot_wider(names_from = Year, values_from = HasVariable, values_fill = FALSE)
+```
+Findings: After the second round of cleaning, now there are 360 variables in all ten datasets in total.
+
+Continue checking data boundaries:
+What are the different variables in each table (different_variable2)?
+```{r}
+# Check the different variables in each table (2015-2024)
+different_variable2 <- col_summary2 %>% filter(`2015` == "FALSE"|
+                       `2016` == "FALSE"|
+                       `2017` == "FALSE"|
+                       `2018` == "FALSE"|
+                       `2019` == "FALSE"|
+                       `2020` == "FALSE"|
+                       `2021` == "FALSE"|
+                       `2022` == "FALSE"|
+                       `2023` == "FALSE"|
+                       `2024` == "FALSE") 
+
+# Check the number of different variables
+different_variable2 %>% count()
+```
+Findings: Now there are 271 different variables in total.
+
+Check again: Are there any variables that only appear in certain years?
+```{r}
+# Check the variables that only appear in the 2024 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "TRUE")
+
+# Check the variables that only appear in the 2024 dataset and are related to National Z-Score.
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "TRUE") %>% 
+  filter(grepl("zscore", Variable, ignore.case = TRUE))
+
+# Check the variables that only appear in the 2024 dataset and are related to races.
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "TRUE") %>% 
+  filter(grepl("hispanic", Variable, ignore.case = TRUE))
+
+# Check the variables that only appear in the 2023 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "TRUE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2022 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "TRUE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2021 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "TRUE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2020 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "TRUE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2019 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "TRUE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2018 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "TRUE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2017 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "FALSE", 
+                       `2017` == "TRUE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2016 dataset
+different_variable2 %>% filter(`2015` == "FALSE",
+                       `2016` == "TRUE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+
+# Check the variables that only appear in the 2015 dataset
+different_variable2 %>% filter(`2015` == "TRUE",
+                       `2016` == "FALSE", 
+                       `2017` == "FALSE", 
+                       `2018` == "FALSE", 
+                       `2019` == "FALSE", 
+                       `2020` == "FALSE", 
+                       `2021` == "FALSE", 
+                       `2022` == "FALSE", 
+                       `2023` == "FALSE",
+                       `2024` == "FALSE")
+```
+Findings: Data cleaned. Now there are 60 variables that appear only in the 2024 dataset. 34 of them are related to national z-scores. The remaining 26 variables represent two race categories: Non-Hispanic Native Hawaiian and Other Pacific Islander and Non-Hispanic 2+ Races. There are 5 variables that are specific to boone18. There are 8 variables that are specific to boone15. 
+
+Are there any variables that appear consecutively in certain years?
+```{r}
+# Check race-specific variables
+different_variable2 %>% filter(grepl("hispanic|black|white|aian|asian|2races|nativehawaiian", Variable, ignore.case = TRUE))
+
+# Check the consistency of race-related measurement standards applied from 2020 to 2024
+# Create a table of shared race-specific variables for further analysis
+race_variable <- different_variable2 %>% 
+  filter(grepl("hispanic|black|white|aian|asian|2races|nativehawaiian", Variable, ignore.case = TRUE)) %>% 
+  filter(`2020` == "TRUE", `2021` == "TRUE", `2022` == "TRUE", `2023` == "TRUE", `2024` == "TRUE")
+```
+Findings: There are 130 race-specific variables related to various health indicators in total. Not all of these variables are consistently available across all ten years of data, making it impossible to track a full decade of trends. However, 95 of these race-related variables were measured using consistent standards from 2020 to 2024, allowing for a five-year trend analysis of those indicators.
+
+What are the shared variables in every table?
+```{r}
+# Check the shared variables that are included in every table (2015-2024)
+shared_variable <- col_summary2 %>% filter(`2015` == "TRUE",
+                       `2016` == "TRUE", 
+                       `2017` == "TRUE", 
+                       `2018` == "TRUE", 
+                       `2019` == "TRUE", 
+                       `2020` == "TRUE", 
+                       `2021` == "TRUE", 
+                       `2022` == "TRUE", 
+                       `2023` == "TRUE",
+                       `2024` == "TRUE") 
+
+# Check the number of shared variables
+shared_variable %>% count()
+
+# Check the number of shared variables which are related to confidence intervals ("95% CI - Low"/"95% CI - High")
+shared_variable %>% filter(grepl("95%ci", Variable, ignore.case = T)) %>% select(Variable)
+```
+Findings: Due to changes in measurement standards across years, the number of consistent variables across all ten datasets is limited. There are 89 shared variables were identified. Among these, four are basic identifiers: FIPS code, State, County, and Year. There are 36 variables related to 95% Confidence Intervals (CI). These variables represent the statistical uncertainty around the point estimates of health indicators. 
+In summary, the 10-year health trends for Boone County (2015–2024) can be analyzed using 89 consistently shared variables. Additionally, 5-year trends (2020–2024) can be examined through 95 race-specific variables that were measured using consistent standards. Other variables, which differ across years due to changes in measurement definitions or scope, may require further reporting or other data sources.
+
+Join the tables based on shared variables for further analysis:
+Combine annual datasets for further analysis by extracting the shared variables across all years into one table:
+```{r}
+# Create table boone_health to contain variables consistently measured across all ten years from 2015 to 2024. Create table boone_health_race to contain race-related variables that were consistently measured during the five-year period from 2020 to 2024.
+boone24_shared <- boone24 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone24_race<- boone24 %>%
+  select(all_of(c("fips", "state", "county", "year", pull(race_variable, 1))))
+
+boone23_shared <- boone23 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone23_race<- boone23 %>%
+  select(all_of(c("fips", "state", "county", "year", pull(race_variable, 1))))
+
+boone22_shared <- boone22 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone22_race<- boone22 %>%
+  select(all_of(c("fips", "state", "county", "year", pull(race_variable, 1))))
+
+boone21_shared <- boone21 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone21_race<- boone21 %>%
+  select(all_of(c("fips", "state", "county", "year", pull(race_variable, 1))))
+
+boone20_shared <- boone20 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone20_race<- boone20 %>%
+  select(all_of(c("fips", "state", "county", "year", pull(race_variable, 1))))
+
+boone19_shared <- boone19 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone18_shared <- boone18 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone17_shared <- boone17 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone16_shared <- boone16 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone15_shared <- boone15 %>%
+  select(all_of(c(pull(shared_variable, 1))))
+
+boone_health <- bind_rows(boone24_shared, boone23_shared, boone22_shared, boone21_shared, boone20_shared, boone19_shared, boone18_shared, boone17_shared, boone16_shared, boone15_shared)
+
+boone_health_race <-bind_rows(boone24_race, boone23_race, boone22_race, boone21_race, boone20_race)
+```
+
+Step3: General Overview 
+
+1. boone_health table
+What information does this dataset track?
+Findings: This dataset from the University of Wisconsin Population Health Institute records the Health Outcome and Health Factor summaries of Boone county, Missouri.
+
+How many rows and columns are in the dataset? What does each row represent?
+```{r}
+boone_health %>% summarise(num_rows = nrow(boone_health), num_columns = ncol(boone_health))
+```
+Findings: The dataset contains 10 rows and 89 columns. Each row represents data for one year (2015-2024), and each of the 89 columns corresponds to a specific health factor. The first four columns are basic identifiers: FIPS code, State, County, and Year.
+
+Are there any missing values (NA)?
+```{r}
+boone_health %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% select(where(~ . > 0))
+```
+Findings: The column lowbirthweight_unreliable contains only NA values across all ten years. This indicates that for the lowbirthweight measure, no data points were flagged as unreliable, likely because all reported values were based on sample sizes greater than 20 and meet the reliability threshold.
+
+2. boone_health_race table
+What information does this dataset track?
+Findings: This dataset from the University of Wisconsin Population Health Institute records the race-specific Health Factor summaries of Boone county, Missouri.
+
+How many rows and columns are in the dataset? What does each row represent?
+```{r}
+boone_health_race %>% summarise(num_rows = nrow(boone_health_race), num_columns = ncol(boone_health_race))
+```
+Findings: The dataset contains 5 rows and 99 columns. Each row represents data for one year (2020-2024). The first four columns are basic identifiers: FIPS code, State, County, and Year, and the rest 95 columns corresponds to a health factor measured separately for racial groups.
+
+Are there any missing values (NA)?
+```{r}
+# Data missing for all five years
+boone_health_race %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% select(where(~ . > 4))
+
+# Data missing for four years
+boone_health_race %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% select(where(~ . > 3 & . < 5))
+
+# Data missing for three years
+boone_health_race %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% select(where(~ . > 2 & . < 4))
+
+# Data missing for two years
+boone_health_race %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% select(where(~ . > 1 & . < 3))
+
+# Data missing for one year
+boone_health_race %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% select(where(~ . > 0 & . < 2))
+```
+Findings: There are 28 columns missing data for all five years (2020-2025). There are 3 columns missing data for four years. There are 4 columns missing data for three years. There is 1 column missing data for one year.
+
+
+
