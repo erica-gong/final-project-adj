@@ -230,8 +230,8 @@ Clean the variable names:
 # Remove unnecessary symbols (#), but keep underscores (_) and percentage signs (%).
 # Make variables all lowercase for consistency.
 boone24 <- boone24 %>%
-  rename_with(function(x) {
-    x %>%
+  rename_with(function(col) {
+    col %>%
       str_remove("\\.\\.\\.\\d+$") %>%
       str_replace_all("[^[:alnum:]_%]", "") %>%
       str_to_lower()
@@ -1633,3 +1633,135 @@ boone_health %>%
          `longcommutedrivingalone_%longcommutedrivesalone`)
 ```
 Finding: The percentage of people driving alone to work and the share of those with long commutes have stayed fairly stable over the past decade, with no clear upward or downward trend.
+
+2. boone_health_race table
+A. LENGTH OF LIFE
+1) Which race group faces the highest risk of early death (before age 75)?
+```{r}
+#The Years of Potential Life Lost rate shows how many total years of life were lost due to deaths before age 75, per 100,000 people.
+boone_health_race %>%
+  arrange(year) %>%
+  select(year,
+         prematuredeath_ypllrateblack,
+         prematuredeath_ypllratewhite,
+         prematuredeath_ypllratehispanic,
+         prematuredeath_ypllrateaian,
+         prematuredeath_ypllrateasian)
+```
+Findings: The early death rates for both non-hispanic Blacks and whites in Boone County increased during 2020-2014, but the gap between the two groups remained large and consistent throughout the five years. Black people in Boone County face a much higher risk of early death compared to white residents. From 2020 to 2024, the YPLL rate for Black residents was consistently more than double that of white residents. In 2024, the rate was 13,643 for Black residents and 6,575 for white residents. There is no available data for Hispanic, AIAN, or Asian populations in this category during the same period.
+
+B. QUALITY OF LIFE
+2) Are there racial disparities in low birthweight births?
+```{r}
+#% Low Birthweight shows the percentage of births with low birthweight (<2500g)
+boone_health_race %>%
+  arrange(year) %>%
+  select(year, `lowbirthweight_%lbwblack`,
+         `lowbirthweight_%lbwwhite`,
+         `lowbirthweight_%lbwhispanic`,
+         `lowbirthweight_%lbwaian`,
+         `lowbirthweight_%lbwasian`)
+```
+Findings: Black infants in Boone County are significantly more likely to be born with low birthweight compared to other racial groups. From 2020 to 2024, about 15 out of every 100 Black babies were born underweight. Asian infants saw a clear rise in low birthweight cases, increasing from about 6 out of every 100 births in 2020 to 8 out of every 100 in 2024. There is no available data for Native Hawaiian or Other Pacific Islander infants
+
+C.SEXUAL ACTIVITY
+3) Which racial groups have higher teen birth rates?
+```{r}
+# Teen Birth Rate shows how many females aged 15–19 gave birth per 1,000 teens.
+boone_health_race %>%
+  arrange(year) %>%
+  select(year,
+         teenbirths_teenbirthrateblack,
+         teenbirths_teenbirthratewhite,
+         teenbirths_teenbirthratehispanic,
+         teenbirths_teenbirthrateaian,
+         teenbirths_teenbirthrateasian)
+```
+Findings: In Boone County, Black and Hispanic teens consistently had much higher birth rates than white teens from 2020 to 2024. In 2024, about 24 out of every 1,000 Black teens and 26 out of every 1,000 Hispanic teens gave birth, compared to 6 out of every 1,000 white teens.
+
+D. QUALITY OF CARE
+4) Are there racial disparities in preventable hospital stays?
+```{r}
+# Preventable Hospitalization Rate shows the	discharges for Ambulatory Care Sensitive Conditions per 100,000 Medicare Enrollees
+boone_health_race %>%
+  arrange(year) %>%
+  select(year,
+         preventablehospitalstays_preventablehosprateblack,
+         preventablehospitalstays_preventablehospratewhite,
+         preventablehospitalstays_preventablehospratehispanic,
+         preventablehospitalstays_preventablehosprateaian,
+         preventablehospitalstays_preventablehosprateasian)
+```
+Findings: Overall, the data shows racial disparities in access to preventive care, with Black and Hispanic residents more likely to experience avoidable hospitalizations.For Hispanic residents in Boone County, the rate increased sharply—from 1,458 in 2020 to 8,369 in 2023.
+
+5) How do mammography screening rates vary by race?
+```{r}
+# % with Annual Mammogram	shows the percentage of female Medicare enrollees having an annual mammogram (age 65-74)
+boone_health_race %>%
+  arrange(year) %>%
+  select(year,
+         `mammographyscreening_%screenedblack`,
+         `mammographyscreening_%screenedwhite`,
+         `mammographyscreening_%screenedhispanic`,
+         `mammographyscreening_%screenedaian`,
+         `mammographyscreening_%screenedasian`)
+```
+Findings: Overall, a higher percentage of white female medicare enrollees in Boone County received an annual mammogram compared to other racial and ethnic groups.
+
+6)How do vaccinated rates vary by race?
+```{r}
+# % Vaccinated shows the percentage of annual Medicare enrollees having an annual flu vaccination
+boone_health_race %>%
+  arrange(year) %>%
+  select(year,
+         `fluvaccinations_%vaccinatedblack`,
+         `fluvaccinations_%vaccinatedwhite`,
+         `fluvaccinations_%vaccinatedhispanic`,
+         `fluvaccinations_%vaccinatedaian`,
+         `fluvaccinations_%vaccinatedasian`)
+```
+Findings: A higher percentage of white medicare enrollees and asian medicare enrollees in Boone County received an annual mammogram compared to other racial and ethnic groups.
+
+E. INCOME
+7) How does child poverty differ by race in Boone County
+```{r}
+#% Children in Poverty shows the percentage of children (under age 18) living in poverty
+boone_health_race %>%
+  arrange(year) %>%
+  select(year,
+         `childreninpoverty_%childreninpovertyblack`,
+         `childreninpoverty_%childreninpovertywhite`,
+         `childreninpoverty_%childreninpovertyhispanic`,
+         `childreninpoverty_%childreninpovertyaian`,
+         `childreninpoverty_%childreninpovertyasian`)
+```
+Findings: Between 2020 and 2024, the percentage of children living in poverty in Boone County increased among Black and Hispanic populations. For Black children, the rate rose from about 37% to over 51%, and for Hispanic children, from roughly 27% to 34%. In contrast, the rate for Asian children declined from nearly 19% in 2020 to just 2.5% in 2024.
+
+F. COMMUNITY SAFETY
+8) Are there differences in injury death rates among different racial groups in Boone County?
+```{r}
+#Injury Death Rate shows the injury mortality rate per 100,000 people
+boone_health_race %>%
+  arrange(year) %>%
+  select(year, 
+         injurydeaths_injurydeathrateblack,
+         injurydeaths_injurydeathratewhite,
+         injurydeaths_injurydeathratehispanic,
+         injurydeaths_injurydeathrateasian,
+         injurydeaths_injurydeathrateaian)
+```
+Findings: From 2020 to 2024, Black residents in Boone County had noticeably higher injury-related death rates than white residents. In 2024, about 115 out of every 100,000 Black residents died from injuries, compared to about 62 among white residents. Data for other racial groups were not available for all five years.
+
+G. TRANSIT
+9) Which racial group is more likely to drive alone to work?
+```{r}
+boone_health_race %>%
+  arrange(year) %>%
+  select(year,
+         `drivingalonetowork_%drivealoneblack`,
+         `drivingalonetowork_%drivealonewhite`,
+         `drivingalonetowork_%drivealonehispanic`,
+         `drivingalonetowork_%drivealoneaian`,
+         `drivingalonetowork_%drivealoneasian`)
+```
+Findings: A smaller share of Hispanic workers drive to work alone compared to other racial groups in Boone County.
