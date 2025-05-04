@@ -1515,3 +1515,37 @@ boone_health %>%
   select(year, teenbirths_teenbirthrate)
 ```
 Finding: Teen births have decreased over the last decade. In 2015, about 20 out of 1,000 teen girls gave birth. In 2024, the number dropped to under 9.
+
+HEALTH FACTORS-CLINICAL CARE
+G. ACCESS TO CARE
+11) How has the percentage of uninsured residents changed?
+```{r}
+# % Uninsured	shows the percentage of people under age 65 without insurance
+boone_health %>%
+  arrange(year) %>%
+  select(year, `uninsured_%uninsured`)
+```
+Finding: The percentage of people in Boone County without health insurance has slightly decreased over the past decade. In 2015, about 15 out of every 100 residents were uninsured. By 2024, that number dropped to around 11 out of 100.
+
+12) How has access to health care providers changed?
+```{r}
+# Primary Care Physicians Rate, Dentist Rate, and Mental Health Provider Rate show	the number of primary care doctors, dentists, and mental health providers per 100,000 people.
+boone_health %>%
+  arrange(year) %>%
+  select(year,
+         primarycarephysicians_primarycarephysiciansrate,
+         dentists_dentistrate,
+         mentalhealthproviders_mentalhealthproviderrate)
+```
+Finding: In Boone County, people today have better access to all three types of care than they did 10 years ago. The number of primary care doctors has grown from about 101 in 2015 to 118 in 2024 per 100,000 people.The number of dentists also increased, from around 59 to 75. Mental health providers saw the biggest jump, from 272 in 2015 to 430 in 2024.
+
+H. QUALITY OF CARE
+13) How has the rate of preventable hospital stays changed?
+```{r}
+# Preventable Hospitalization Rate in 2019-2024 datasets shows the	discharges for Ambulatory Care Sensitive Conditions per 100,000 Medicare Enrollees
+#Preventable Hospitalization Rate in 2015-2018 datasets shows the	discharges for Ambulatory Care Sensitive Conditionsper 1,000 Medicare Enrollees
+boone_health %>%
+  arrange(year) %>%
+  select(year, preventablehospitalstays_preventablehospitalizationrate)
+```
+Finding: Fewer people in Boone County who are on Medicare are ending up in the hospital for problems that could have been treated earlier, as the preventable hospitalization rate have dropped significantly.
