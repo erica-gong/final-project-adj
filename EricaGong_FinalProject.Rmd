@@ -1600,3 +1600,36 @@ boone_health %>%
   select(year, injurydeaths_injurydeathrate)
 ```
 Finding: The injury death rate in Boone County first went down, from around 53 in 2016 to 46 in 2019, but then started to climb again in recent years. By 2024, it reached 63 deaths per 100,000 people, the highest in the past decade.
+
+HEALTH FACTORS-PHYSICAL ENVIRONMENT
+N. AIR QUALITY
+19)How has air quality changed in Boone County?
+```{r}
+#Average Daily PM2.5 shows the average daily amount of fine particulate matter in micrograms per cubic meter
+boone_health %>%
+  arrange(year) %>%
+  select(year, airpollutionparticulatematter_averagedailypm25)
+```
+Finding: Air quality has improved. PM2.5 levels fell from 10.15 to 8.1 in 2024.
+
+O. HOUSING AND TRANSIT
+20) How has the housing burden changed in Boone County?
+```{r}
+#Severe Housing Problems shows the percentage of households with at least 1 of 4 housing problems: overcrowding, high housing costs, lack of kitchen facilities, or lack of plumbing facilities.
+boone_health %>%
+  arrange(year) %>%
+  select(year, `severehousingproblems_%severehousingproblems`)
+```
+Finding: Severe housing problems have slightly decreased, improving from 18% in 2015 to 16% in 2024.
+
+21)How have commuting patterns changed for people who drive to work alone?
+```{r}
+#Driving Alone to Work means the percentage of the workforce that drives alone to work.
+#Long Commute means the percentage that commute more than 30 minutes among workers who commute in their car alone 
+boone_health %>%
+  arrange(year) %>%
+  select(year,
+         `drivingalonetowork_%drivealonetowork`,
+         `longcommutedrivingalone_%longcommutedrivesalone`)
+```
+Finding: The percentage of people driving alone to work and the share of those with long commutes have stayed fairly stable over the past decade, with no clear upward or downward trend.
