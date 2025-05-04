@@ -1765,3 +1765,24 @@ boone_health_race %>%
          `drivingalonetowork_%drivealoneasian`)
 ```
 Findings: A smaller share of Hispanic workers drive to work alone compared to other racial groups in Boone County.
+
+Step5: Summary and future reporting
+1. Declining mental and physical well-being despite healthcare access improvements
+Key Findings: While access to care has improved, residents in Boone County are reporting more poor physical and mental health days than a decade ago. Mental health may be a growing area of concern even as provider availability expands, as the average number of mentally unhealthy days has increased more than physically unhealthy days.
+
+Story and Reporting Ideas: This story could focus on barriers like cost, stigma, or inadequate treatment quality through reporting to explore why self-reported mental and physical health is worsening despite a sharp increase in available healthcare providers. Besides, as federal Medicaid cuts could leave Missouri with huge budget shortfall, further reporting could explore how reduced funding might make it harder for people in the county to access care.
+
+2. Obesity and inactivity on the rise despite better food and exercise access
+Key Findings: Boone County residents have greater access to healthy food and exercise facilities in 2024 than in 2015. However, adult obesity rates have increased steadily, and the percentage of residents reporting no physical activity in their leisure time shows a slight upward trend. This suggests a disconnect between access and behavior.
+
+Story and Reporting Ideas: Future reporting can look into what specific healthy food and exercise options are available in Boone County and why residents aren't using available health and fitness resources.
+
+3. Improvements in public safety and preventive care, but injury deaths rising
+Key Findings: Alcohol-related traffic deaths and preventable hospital stays have decreased over the decade. Teen birth rates and smoking rates have also improved. Yet, injury death rates—especially among Black residents—have risen and reached a 10-year high in 2024. This divergence highlights the need for targeted safety and violence-prevention efforts.
+
+Story and Reporting Ideas: Future interviews with emergency responders, hospital staff, and local safety officials can help identify the main causes behind the rise in injury deaths and evaluate whether current prevention efforts are reaching those most at risk.
+
+4. Health outcomes vary by race in Boone County
+Key Findings: Data over the past five years show gaps between racial groups in Boone County across several health measures. Black residents experience higher rates of early death, low birthweight births, teen births, injury-related deaths, and preventable hospitalizations compared to white residents. Differences are also observed in child poverty rates, which have increased among Black and Hispanic children while declining for others. 
+
+Story and Reporting Ideas: Future interviews with healthcare providers and public health experts could focus on health issues affecting Black residents, such as insurance coverage, access to primary care, and continuity of follow-up care.
