@@ -1389,6 +1389,9 @@ boone_health_race %>% summarise(num_rows = nrow(boone_health_race), num_columns 
 ```
 Findings: The dataset contains 5 rows and 99 columns. Each row represents data for one year (2020-2024). The first four columns are basic identifiers: FIPS code, State, County, and Year, and the rest 95 columns corresponds to a health factor measured separately for racial groups.
 
+What races were measured?
+Findings: After data cleaning based on the data dictionary, this dataset now includes the following five racial and ethnic groups: Hispanic, American Indian and Alaska Native (AIAN), Asian, Black, and White. What needs attention is that two new categories were added in the 2024 dataset: Non-Hispanic Native Hawaiian and Other Pacific Islander and Non-Hispanic Two or More Races. However, for Boone County, Missouri, in 2024, data for these two groups is mostly missing, except for low birthweight rate and teen birth rate under the "Non-Hispanic 2+ races" category.
+
 Are there any missing values (NA)?
 ```{r}
 # Data missing for all five years
@@ -1406,7 +1409,46 @@ boone_health_race %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% selec
 # Data missing for one year
 boone_health_race %>% summarise(across(everything(), ~ sum(is.na(.)))) %>% select(where(~ . > 0 & . < 2))
 ```
-Findings: There are 28 columns missing data for all five years (2020-2025). There are 3 columns missing data for four years. There are 4 columns missing data for three years. There is 1 column missing data for one year.
+Findings: In Boone County, Missouri, not every racial category has complete data for every year. There are 28 columns missing data for all five years (2020-2025). There are 3 columns missing data for four years. There are 4 columns missing data for three years. There is 1 column missing data for one year.
 
+Step4: Analyzing data.
 
+1. boone_health table
+A. LENGTH OF LIFE
+1) How has Years of Potential Life Lost Rate changed over the past 10 years (2015-2024)? Is early death becoming more common in Boone County?
+```{r}
+#The Years of Potential Life Lost rate shows how many total years of life were lost due to deaths before age 75, per 100,000 people.
+boone_health %>% arrange(year) %>% select(year, prematuredeath_yearsofpotentiallifelostrate) 
+```
+Finding: Boone County is seeing more years of life lost to early death over the past decade. Between 2015 and 2024, the age-adjusted rate of potential life lost before age 75 increased from around 5,590 to more than 7,000 per 100,000 people. For every 100,000 residents in Boone County, a total of 7,087 years of life were lost due to people dying too youn in 2024.
+
+B. QUALITY OF LIFE
+2) How has the percentage of people in Boone County who report being in poor or fair health changed?
+```{r}
+#% Fair or Poor Health shows the percentage of adults that report fair or poor health
+boone_health %>%
+  arrange(year) %>%
+  select(year, `poororfairhealth_%fairorpoorhealth`)
+```
+Finding: The percentage of Boone County residents reporting poor or fair health has fluctuated between about 13% and 17% in the past decade, with no clear long-term trend.
+
+3) What are the trends in reported mental and physical health over the past decade?
+```{r}
+# Average number of physically unhealthy days	shows the average number of reported physically unhealthy days per month. Average number of mentally unhealthy days	shows the average number of reported mentally unhealthy days per month.
+boone_health %>%
+  arrange(year) %>%
+  select(year, 
+         poorphysicalhealthdays_averagenumberofphysicallyunhealthydays,
+         poormentalhealthdays_averagenumberofmentallyunhealthydays)
+```
+Finding: Both physical and mental health have worsened over the past decade in Boone County. On average, people reported about one more day per month of poor physical health and about one and a half more days of poor mental health compared to ten years ago.Residents consistently reported more mentally unhealthy days than physically unhealthy days.
+
+4) How has the percentage of babies born underweight changed in Boone County?
+```{r}
+#% Low Birthweight shows the percentage of births with low birthweight (<2500g)
+boone_health %>%
+  arrange(year) %>%
+  select(year, `lowbirthweight_%lowbirthweight`)
+```
+Finding: The percentage of babies born with low birthweight has gradually increased in Boone County over the past decade. For every 100 births, one more baby is born underweight in 2024 compared to ten years ago.
 
