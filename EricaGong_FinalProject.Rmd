@@ -1549,3 +1549,54 @@ boone_health %>%
   select(year, preventablehospitalstays_preventablehospitalizationrate)
 ```
 Finding: Fewer people in Boone County who are on Medicare are ending up in the hospital for problems that could have been treated earlier, as the preventable hospitalization rate have dropped significantly.
+
+HEALTH FACTORS-SOCIAL & ECONOMIC FACTORS
+I. EDUCATION
+14)How has college attendance rate changed?
+```{r}
+#Some College	means the percentage of adults ages 25-44 with some post-secondary education.
+boone_health %>%
+  arrange(year) %>%
+  select(year, `somecollege_%somecollege`)
+```
+Finding: College participation is high and stable, hovering around 79–80% in Boone County over the past decade.
+
+J. EMPLOYMENT
+15)How has the unemployment rate changed?
+```{r}
+# % Unemployed shows the percentage of population ages 16+ unemployed and looking for work
+boone_health %>%
+  arrange(year) %>%
+  select(year, `unemployment_%unemployed`)
+```
+Finding: Although unemployment temporarily increased in 2022, the overall trend over the past decade has been downward. In 2015, about 45 out of every 1,000 people were unemployed. By 2024, that number dropped to around 20 out of 1,000.
+
+K. INCOME
+16)How has the child poverty rate changed in Boone County?
+```{r}
+#% Children in Poverty shows the percentage of children (under age 18) living in poverty
+boone_health %>%
+  arrange(year) %>%
+  select(year, `childreninpoverty_%childreninpoverty`)
+```
+Finding: The share of children living in poverty in Boone County has clearly gone down over the past decade. In 2016, about 18 out of every 100 children were living in poverty. By 2024, that number dropped to around 13 out of 100.
+
+L. FAMILY AND SOCIAL SUPPORT
+17) How has community engagement changed in Boone County?
+```{r}
+# Social Associations	shows the number of membership associations per 10,000 population.
+boone_health %>%
+  arrange(year) %>%
+  select(year, socialassociations_socialassociationrate)
+```
+Finding: Community involvement dropped slightly in recent years, falling from over 12 to under 10 associations per 10,000 people.
+
+M. COMMUNITY SAFETY
+18)How has the injury death rate changed?
+```{r}
+#Injury Death Rate shows the injury mortality rate per 100,000 people
+boone_health %>%
+  arrange(year) %>%
+  select(year, injurydeaths_injurydeathrate)
+```
+Finding: The injury death rate in Boone County first went down, from around 53 in 2016 to 46 in 2019, but then started to climb again in recent years. By 2024, it reached 63 deaths per 100,000 people, the highest in the past decade.
