@@ -1452,3 +1452,66 @@ boone_health %>%
 ```
 Finding: The percentage of babies born with low birthweight has gradually increased in Boone County over the past decade. For every 100 births, one more baby is born underweight in 2024 compared to ten years ago.
 
+HEALTH FACTORS-HEALTH BEHAVIORS
+C.TOBACCO USE
+5) How has the percentage of adults who smoke changed in Boone County over the last 10 years?
+```{r}
+# % Adults Reporting Currently Smoking shows the percentage of adults that reported currently smoking
+boone_health %>%
+  arrange(year) %>%
+  select(year, `adultsmoking_%adultsreportingcurrentlysmoking`)
+```
+Finding: Smoking rates have declined in Boone County in the past two years. In 2015, about 18.5% of adults reported smoking, while in 2024 that number dropped to around 15.8%.
+
+D. DIET AND EXERCISE
+6) How has the percentage of adults with obesity and the access to healthy food changed in Boone County?
+```{r}
+#% Adults with Obesity shows the percentage of adults that report BMI >= 30
+#Food Environment Index	is the indicator of access to healthy foods. 0 is worst, and 10 is best.
+boone_health %>%
+  arrange(year) %>%
+  select(year, `adultobesity_%adultswithobesity`, foodenvironmentindex_foodenvironmentindex)
+```
+Finding: Access to healthy food in Boone County has slightly improved over the past decade, which means it is now a bit easier for residents to get healthy food options than it was in 2015.The food environment index was 7.1 in 2015, peaked at 7.7 in 2021, and reached 7.5 in 2024—a 0.4-point increase over ten years. However, the percentage of adults with obesity in Boone County has shown a clear increase over the past decade. There are 7 more people with obesity per 100 adults in 2024 than in 2015.
+
+7) How have people’s physical activity levels and access to exercise opportunities changed in in Boone County over the past decade?
+```{r}
+# % Physically Inactive shows the percentage of adults that report no leisure-time physical activity. 
+# % With Access to Exercise Opportunities shows the percentage of the population with access to places for physical activity.
+boone_health %>%
+  arrange(year) %>%
+  select(year, `physicalinactivity_%physicallyinactive`,
+         `accesstoexerciseopportunities_%withaccesstoexerciseopportunities`)
+```
+Finding: In Boone County, more people now have access to places where they can exercise—up from around 74% in 2015 to over 88% in 2024. However, the percentage of adults who report no leisure-time physical activity has fluctuated over the past decade with a slight upward trend.
+
+E. ALCOHOL AND DRUG USE
+8)How has alcohol use and alcohol-related traffic deaths changed?
+```{r}
+# Excessive Drinking shows the percentage of adults reporting binge or heavy drinking (age-adjusted).
+# Alcohol-Impaired Driving Deaths	shows the percentage of driving deaths with alcohol involvement.
+boone_health %>%
+  arrange(year) %>%
+  select(year, `excessivedrinking_%excessivedrinking`,
+         `alcoholimpaireddrivingdeaths_%drivingdeathswithalcoholinvolvement`)
+```
+Finding: The percentage of adults reporting excessive drinking in Boone County rose from 2015 to 2016 but has stayed relatively stable between 2016 and 2024, fluctuating around 19–21%. Meanwhile, alcohol-related traffic deaths have clearly declined, dropping from nearly 49% in 2015 to 28% in 2024.
+
+F.SEXUAL ACTIVITY
+9)How has the rate of sexually transmitted infections changed?
+```{r}
+# Chlamydia Rate shows the number of reported chlamydia cases per 100,000 people.
+boone_health %>%
+  arrange(year) %>%
+  select(year, sexuallytransmittedinfections_chlamydiarate)
+```
+Finding: Chlamydia rates peaked in 2021 and have since dropped slightly.
+
+10) How has the teen birth rate changed in Boone County?
+```{r}
+#Teen Birth Rate shows how many females aged 15–19 gave birth per 1,000 teens.
+boone_health %>%
+  arrange(year) %>%
+  select(year, teenbirths_teenbirthrate)
+```
+Finding: Teen births have decreased over the last decade. In 2015, about 20 out of 1,000 teen girls gave birth. In 2024, the number dropped to under 9.
