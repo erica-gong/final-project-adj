@@ -1423,7 +1423,7 @@ boone_health %>% arrange(year) %>% select(year, prematuredeath_yearsofpotentiall
 Finding: Boone County is seeing more years of life lost to early death over the past decade. Between 2015 and 2024, the age-adjusted rate of potential life lost before age 75 increased from around 5,590 to more than 7,000 per 100,000 people. For every 100,000 residents in Boone County, a total of 7,087 years of life were lost due to people dying too youn in 2024.
 
 B. QUALITY OF LIFE
-2) How has the percentage of people in Boone County who report being in poor or fair health changed?
+2) Are more Boone County residents living in poor or fair health than before?
 ```{r}
 #% Fair or Poor Health shows the percentage of adults that report fair or poor health
 boone_health %>%
@@ -1537,12 +1537,12 @@ boone_health %>%
          dentists_dentistrate,
          mentalhealthproviders_mentalhealthproviderrate)
 ```
-Finding: In Boone County, people today have better access to all three types of care than they did 10 years ago. The number of primary care doctors has grown from about 101 in 2015 to 118 in 2024 per 100,000 people.The number of dentists also increased, from around 59 to 75. Mental health providers saw the biggest jump, from 272 in 2015 to 430 in 2024.
+Finding: In Boone County, now people have better access to all three types of care than they did 10 years ago. The number of primary care doctors has grown from about 101 in 2015 to 118 in 2024 per 100,000 people.The number of dentists also increased, from around 59 to 75. Mental health providers saw the biggest jump, from 272 in 2015 to 430 in 2024.
 
 H. QUALITY OF CARE
 13) How has the rate of preventable hospital stays changed?
 ```{r}
-# Preventable Hospitalization Rate in 2019-2024 datasets shows the	discharges for Ambulatory Care Sensitive Conditions per 100,000 Medicare Enrollees
+# Preventable Hospitalization Rate in 2019-2024 datasets shows the discharges for Ambulatory Care Sensitive Conditions per 100,000 Medicare Enrollees
 #Preventable Hospitalization Rate in 2015-2018 datasets shows the	discharges for Ambulatory Care Sensitive Conditionsper 1,000 Medicare Enrollees
 boone_health %>%
   arrange(year) %>%
@@ -1554,7 +1554,7 @@ HEALTH FACTORS-SOCIAL & ECONOMIC FACTORS
 I. EDUCATION
 14)How has college attendance rate changed?
 ```{r}
-#Some College	means the percentage of adults ages 25-44 with some post-secondary education.
+# %Some College	means the percentage of adults ages 25-44 with some post-secondary education.
 boone_health %>%
   arrange(year) %>%
   select(year, `somecollege_%somecollege`)
@@ -1648,7 +1648,7 @@ boone_health_race %>%
          prematuredeath_ypllrateaian,
          prematuredeath_ypllrateasian)
 ```
-Findings: The early death rates for both non-hispanic Blacks and whites in Boone County increased during 2020-2014, but the gap between the two groups remained large and consistent throughout the five years. Black people in Boone County face a much higher risk of early death compared to white residents. From 2020 to 2024, the YPLL rate for Black residents was consistently more than double that of white residents. In 2024, the rate was 13,643 for Black residents and 6,575 for white residents. There is no available data for Hispanic, AIAN, or Asian populations in this category during the same period.
+Findings: The early death rates for both non-hispanic Blacks and Whites in Boone County increased during 2020-2014, but the gap between the two groups remained large and consistent throughout the five years. Black people in Boone County face a much higher risk of early death compared to white residents. From 2020 to 2024, the YPLL rate for Black residents was consistently more than double that of white residents. In 2024, the rate was 13,643 for Black residents and 6,575 for white residents. There is no available data for Hispanic, AIAN, or Asian populations in this category during the same period.
 
 B. QUALITY OF LIFE
 2) Are there racial disparities in low birthweight births?
@@ -1755,6 +1755,7 @@ Findings: From 2020 to 2024, Black residents in Boone County had noticeably high
 G. TRANSIT
 9) Which racial group is more likely to drive alone to work?
 ```{r}
+#Driving Alone to Work means the percentage of the workforce that drives alone to work.
 boone_health_race %>%
   arrange(year) %>%
   select(year,
@@ -1780,7 +1781,7 @@ Story and Reporting Ideas: Future reporting can look into what specific healthy 
 3. Improvements in public safety and preventive care, but injury deaths rising
 Key Findings: Alcohol-related traffic deaths and preventable hospital stays have decreased over the decade. Teen birth rates and smoking rates have also improved. Yet, injury death rates—especially among Black residents—have risen and reached a 10-year high in 2024. This divergence highlights the need for targeted safety and violence-prevention efforts.
 
-Story and Reporting Ideas: Future interviews with emergency responders, hospital staff, and local safety officials can help identify the main causes behind the rise in injury deaths and evaluate whether current prevention efforts are reaching those most at risk.
+Story and Reporting Ideas: Future interviews with emergency responders, hospital staff, and local safety officials can help identify the causes behind the rise in injury deaths and evaluate whether current prevention efforts are reaching those most at risk.
 
 4. Health outcomes vary by race in Boone County
 Key Findings: Data over the past five years show gaps between racial groups in Boone County across several health measures. Black residents experience higher rates of early death, low birthweight births, teen births, injury-related deaths, and preventable hospitalizations compared to white residents. Differences are also observed in child poverty rates, which have increased among Black and Hispanic children while declining for others. 
